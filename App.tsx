@@ -3,14 +3,18 @@ import Navigation from "./src/navigation";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import HomeScreen from "./src/screens/HomeScreen";
 import { PaperProvider } from "react-native-paper";
+import { Provider } from "react-redux";
+import store from "./src/store";
 
 export default function App() {
   return (
-    <PaperProvider>
-      <SafeAreaProvider>
-        <Navigation />
-      </SafeAreaProvider>
-    </PaperProvider>
+    <Provider store={store}>
+      <PaperProvider>
+        <SafeAreaProvider>
+          <Navigation />
+        </SafeAreaProvider>
+      </PaperProvider>
+    </Provider>
   );
 }
 

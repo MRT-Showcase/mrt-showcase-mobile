@@ -3,7 +3,7 @@ import {
   AppStackNavigationProp,
   AppStackParamList,
 } from "../../navigation/interface";
-import { Button, TextInput } from "react-native-paper";
+import { Button, Snackbar, TextInput } from "react-native-paper";
 import { useState } from "react";
 
 type Props = {
@@ -12,6 +12,24 @@ type Props = {
 
 const SignIn: React.FC<Props> = ({ navigation }) => {
   const [phone, setPhone] = useState<string>("");
+
+  const goToHome = () => {
+    navigation.navigate("Home");
+  };
+
+  const signIn = () => {
+    // TODO: sign in logic
+
+    goToHome();
+  };
+
+  const goToSignUp = () => {
+    navigation.navigate("SignUp");
+  };
+
+  const signInWithGoogle = () => {
+    // TODO
+  };
 
   return (
     <View
