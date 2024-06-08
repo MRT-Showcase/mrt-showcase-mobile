@@ -1,8 +1,8 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import counterReducer from "./slices/counter";
+import snackbarReducer from "./slices/snackbar";
 
 const rootReducer = combineReducers({
-  counter: counterReducer,
+  snackbar: snackbarReducer,
 });
 
 export default rootReducer;

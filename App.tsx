@@ -5,6 +5,7 @@ import HomeScreen from "./src/screens/HomeScreen";
 import { PaperProvider } from "react-native-paper";
 import { Provider } from "react-redux";
 import store from "./src/store";
+import SnackbarRoot from "./src/components/SnackbarRoot";
 
 export default function App() {
   return (
@@ -12,6 +13,7 @@ export default function App() {
       <PaperProvider>
         <SafeAreaProvider>
           <Navigation />
+          <SnackbarRoot />
         </SafeAreaProvider>
       </PaperProvider>
     </Provider>
