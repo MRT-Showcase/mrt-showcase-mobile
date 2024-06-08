@@ -23,6 +23,10 @@ const AppStackNavigator = () => (
     <Stack.Screen
       name="Home"
       component={HomeScreen}
+      options={{
+        title: "",
+        headerShadowVisible: false,
+      }}
     />
     <Stack.Screen
       name="Profile"
