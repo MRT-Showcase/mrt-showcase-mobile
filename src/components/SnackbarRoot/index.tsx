@@ -14,6 +14,7 @@ const SnackbarRoot = () => {
     <Snackbar
       visible={snackbarMessage != undefined}
       onDismiss={() => dispatch(removeMessage())}
+      duration={5000}
     >
       {snackbarMessage}
     </Snackbar>

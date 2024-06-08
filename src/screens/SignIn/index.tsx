@@ -5,6 +5,8 @@ import {
 } from "../../navigation/interface";
 import { Button, Snackbar, TextInput } from "react-native-paper";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setMessage } from "../../store/slices/snackbar";
 
 type Props = {
   navigation: AppStackNavigationProp<"SignIn">;
@@ -12,6 +14,7 @@ type Props = {
 
 const SignIn: React.FC<Props> = ({ navigation }) => {
   const [phone, setPhone] = useState<string>("");
+  const dispatch = useDispatch();
 
   const goToHome = () => {
     navigation.navigate("Home");
@@ -19,6 +22,10 @@ const SignIn: React.FC<Props> = ({ navigation }) => {
 
   const signIn = () => {
     // TODO: sign in logic
+
+    if (!phone) {
+      return dispatch(setMessage("Harap isi field diatas terlebih dahulu."));
+    }
 
     goToHome();
   };
@@ -95,7 +102,7 @@ const SignIn: React.FC<Props> = ({ navigation }) => {
             borderRadius: 10,
             backgroundColor: "#0055B8",
           }}
-          onPress={() => navigation.navigate("Home")}
+          onPress={signIn}
         >
           Masuk
         </Button>
@@ -119,7 +126,7 @@ const SignIn: React.FC<Props> = ({ navigation }) => {
           }}
         >
           <Text>Tidak punya akun?</Text>
-          <Button>
+          <Button onPress={goToSignUp}>
             <Text style={{ color: "#0055B8" }}>Daftar disini</Text>
           </Button>
         </View>
@@ -129,6 +136,7 @@ const SignIn: React.FC<Props> = ({ navigation }) => {
             borderRadius: 10,
             width: "100%",
           }}
+          icon={require("../../../assets/google.png")}
         >
           <Text
             style={{
