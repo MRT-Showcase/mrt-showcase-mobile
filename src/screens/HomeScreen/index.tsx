@@ -6,7 +6,11 @@ import PromoGayaHidup from "./sections/PromoGayaHidup";
 import PromoTiketFeeder from "./sections/PromoTiketFeeder";
 
 const HomeScreen = () => (
-  <View>
+  <View
+    style={{
+      gap: 30,
+    }}
+  >
     <Hero />
     <Menu />
     <GayaHidup />
