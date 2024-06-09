@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import TitleAndDescription from "../../../components/TitleAndDescription";
 import { Image } from "react-native";
 
@@ -25,19 +25,24 @@ const PromoGayaHidup = () => {
         description="Tingkatkan gaya hidup kamu lebih baik"
       />
 
-      <View
-        style={{
-          flexDirection: "row",
-          gap: 14,
-        }}
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
       >
-        {gayaHidupContents.map((item, index) => (
-          <Image
-            source={item.image}
-            key={index}
-          />
-        ))}
-      </View>
+        <View
+          style={{
+            flexDirection: "row",
+            gap: 14,
+          }}
+        >
+          {gayaHidupContents.map((item, index) => (
+            <Image
+              source={item.image}
+              key={index}
+            />
+          ))}
+        </View>
+      </ScrollView>
     </View>
   );
 };
