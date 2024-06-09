@@ -5,6 +5,7 @@ export type AppStackParamList = {
   Profile: undefined;
   SignIn: undefined;
   SignUp: undefined;
+  OTP: undefined;
 };
 
 export type AppStackNavigationProp<T extends keyof AppStackParamList> =

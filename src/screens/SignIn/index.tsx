@@ -16,8 +16,8 @@ const SignIn: React.FC<Props> = ({ navigation }) => {
   const [phone, setPhone] = useState<string>("");
   const dispatch = useDispatch();
 
-  const goToHome = () => {
-    navigation.navigate("Home");
+  const goToOTPInputPage = () => {
+    navigation.navigate("OTP");
   };
 
   const signIn = () => {
@@ -27,7 +27,7 @@ const SignIn: React.FC<Props> = ({ navigation }) => {
       return dispatch(setMessage("Harap isi field diatas terlebih dahulu."));
     }
 
-    goToHome();
+    goToOTPInputPage();
   };
 
   const goToSignUp = () => {
