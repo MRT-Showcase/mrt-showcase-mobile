@@ -1,16 +1,17 @@
-import { Image, Keyboard, StyleSheet, Text, View } from "react-native";
-import { AppStackNavigationProp } from "../../navigation/interface";
-import { Button, TextInput } from "react-native-paper";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { setMessage } from "../../store/slices/snackbar";
+import {Image, Keyboard, StyleSheet, Text, View} from "react-native";
+import {AppStackNavigationProp} from "../../navigation/interface";
+import {Button, TextInput} from "react-native-paper";
+import {useState} from "react";
+import {useUserStore} from "../../zustand-store/user";
 
 type Props = {
     navigation: AppStackNavigationProp<"Login">;
 };
 
-const Login: React.FC<Props> = ({ navigation }) => {
+const Login: React.FC<Props> = ({navigation}) => {
     const [phone, setPhone] = useState<string>("");
+    const setPhoneNumber = useUserStore((state) => state.setPhoneNumber);
+    const {user} = useUserStore()
     const [loading, setLoading] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<{
         message: string;
@@ -70,6 +71,8 @@ const Login: React.FC<Props> = ({ navigation }) => {
             return
         }
 
+        setPhoneNumber(phone);
+
         goToOTPInputPage();
     };
 
@@ -84,7 +87,7 @@ const Login: React.FC<Props> = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <Image source={require("../../../assets/icon.png")} />
+                <Image source={require("../../../assets/icon.png")}/>
                 <Text style={styles.headerText}>Masuk dengan akun MyMRTJ</Text>
             </View>
 
@@ -114,10 +117,12 @@ const Login: React.FC<Props> = ({ navigation }) => {
                         />
                     </View>
                     {errorMessage?.error && (
-                        <Text style={styles.errorText}>{errorMessage.message}</Text>
+                        <Text
+                            style={styles.errorText}>{errorMessage.message}</Text>
                     )}
                 </View>
-                <Button mode="contained" style={styles.signInButton} onPress={signIn} loading={loading}>
+                <Button mode="contained" style={styles.signInButton}
+                        onPress={signIn} loading={loading}>
                     Masuk
                 </Button>
             </View>
@@ -134,7 +139,8 @@ const Login: React.FC<Props> = ({ navigation }) => {
                     style={styles.googleButton}
                     icon={require("../../../assets/google.png")}
                 >
-                    <Text style={styles.googleButtonText}>Masuk dengan Google</Text>
+                    <Text style={styles.googleButtonText}>Masuk dengan
+                        Google</Text>
                 </Button>
             </View>
         </View>
