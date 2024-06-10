@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "mrt-showcase-mobile",
-    "slug": "mrt-showcase-mobile",
+    "slug": "mrt-showcase",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -12,16 +12,24 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.mhmdhaekal.mrtshowcase"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.mhmdhaekal.mrtshowcase"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "2e3d7fb9-24b4-4fb7-8eb0-8d01ee260ef0"
+      }
+    },
+    "owner": "mhmdhaekal"
   }
 }
