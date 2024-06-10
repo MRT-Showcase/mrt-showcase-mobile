@@ -38,15 +38,24 @@ const OTPInput: React.FC<OTPInputProps> = ({ length, onCodeFilled }) => {
   };
 
   const handleBackspace = (
-    event: NativeSyntheticEvent<TextInputKeyPressEventData>,
-    index: number
+      event: NativeSyntheticEvent<TextInputKeyPressEventData>,
+      index: number
   ) => {
-    if (event.nativeEvent.key === "Backspace" && otp[index] === "") {
-      if (index > 0) {
-        inputs.current[index - 1]?.focus();
+    if (event.nativeEvent.key === "Backspace") {
+      const newOtp = [...otp];
+      if (otp[index] === "") {
+        if (index > 0) {
+          newOtp[index - 1] = "";
+          setOtp(newOtp);
+          inputs.current[index - 1]?.focus();
+        }
+      } else {
+        newOtp[index] = "";
+        setOtp(newOtp);
       }
     }
   };
+
 
   return (
     <View style={styles.container}>
@@ -68,7 +77,7 @@ const OTPInput: React.FC<OTPInputProps> = ({ length, onCodeFilled }) => {
             ref={(ref) => (inputs.current[index] = ref)}
             autoFocus={index === 0}
             blurOnSubmit={false}
-            caretHidden
+            caretHidden={true}
           />
         </View>
       ))}
@@ -78,14 +87,17 @@ const OTPInput: React.FC<OTPInputProps> = ({ length, onCodeFilled }) => {
 
 const styles = StyleSheet.create({
   container: {
+    display: "flex",
+    position: "relative",
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    gap: 32,
+    width: "100%",
+    gap: 20,
   },
   circle: {
-    width: 24,
-    height: 24,
+    width: 20,
+    height: 20,
     borderRadius: 20,
     justifyContent: "center",
     alignItems: "center",
@@ -97,7 +109,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "transparent",
     fontSize: 24,
-    // Adjust the input background color to be transparent
     backgroundColor: "transparent",
   },
 });

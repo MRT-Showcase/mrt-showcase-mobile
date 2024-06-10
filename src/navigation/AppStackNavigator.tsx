@@ -9,9 +9,9 @@ import OTPScreen from "../screens/OTPScreen";
 const Stack = createNativeStackNavigator<AppStackParamList>(); // TODO: generic
 
 const AppStackNavigator = () => (
-  <Stack.Navigator initialRouteName="SignIn">
+  <Stack.Navigator initialRouteName="Login">
     <Stack.Screen
-      name="SignIn"
+      name="Login"
       component={SignIn}
       options={{
         headerShown: false,

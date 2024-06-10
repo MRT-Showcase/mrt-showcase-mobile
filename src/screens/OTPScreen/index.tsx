@@ -1,8 +1,8 @@
 import { Alert, Text, View } from "react-native";
 import { Button } from "react-native-paper";
 import OTPInput from "../../components/OTPInput";
-import { useState } from "react";
 import { AppStackNavigationProp } from "../../navigation/interface";
+import React from "react";
 
 type Props = {
   navigation: AppStackNavigationProp<"OTP">;
@@ -10,7 +10,8 @@ type Props = {
 
 const OTPScreen: React.FC<Props> = ({ navigation }) => {
   const handleCodeFilled = (code: string) => {
-    navigation.navigate("Home");
+      navigation.popToTop()
+      navigation.replace("Home");
   };
 
   return (
@@ -21,6 +22,7 @@ const OTPScreen: React.FC<Props> = ({ navigation }) => {
         padding: 20,
         display: "flex",
         flexDirection: "column",
+        position: 'relative',
         gap: 42,
       }}
     >
