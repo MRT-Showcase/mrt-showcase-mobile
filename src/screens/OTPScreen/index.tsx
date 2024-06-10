@@ -1,4 +1,4 @@
-import { Alert, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { Button } from "react-native-paper";
 import OTPInput from "../../components/OTPInput";
 import { AppStackNavigationProp } from "../../navigation/interface";
@@ -9,7 +9,7 @@ type Props = {
 };
 
 const OTPScreen: React.FC<Props> = ({ navigation }) => {
-  const handleCodeFilled = (code: string) => {
+  const handleCodeFilled = (_code: string) => {
       navigation.popToTop()
       navigation.replace("Home");
   };
