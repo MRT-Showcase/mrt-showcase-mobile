@@ -1,7 +1,9 @@
-import { create } from "zustand";
-import {User} from "./type/user";
+import {create} from 'zustand';
+import {createJSONStorage, persist} from 'zustand/middleware';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {User} from './type/user';
 
-interface UserState{
+interface UserState {
     user: User | null;
     phoneNumber: string | null;
     setUser: (user: User) => void;
@@ -9,11 +11,18 @@ interface UserState{
     setPhoneNumber: (phoneNumber: string) => void;
 }
 
-export const useUserStore = create<UserState>((set) => ({
-    user: null,
-    phoneNumber: null,
-    setUser: (user) => set({user}),
-    deleteUser: () => set({user: null}),
-    setPhoneNumber: (phoneNumber) => set({phoneNumber}),
-
-}));
+export const useUserStore = create<UserState>()(
+    persist(
+        (set) => ({
+            user: null,
+            phoneNumber: null,
+            setUser: (user) => set({user}),
+            deleteUser: () => set({user: null}),
+            setPhoneNumber: (phoneNumber) => set({phoneNumber}),
+        }),
+        {
+            name: 'user-storage',
+            storage: createJSONStorage(() => AsyncStorage),
+        }
+    )
+);

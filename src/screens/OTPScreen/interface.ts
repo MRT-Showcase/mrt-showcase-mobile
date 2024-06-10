@@ -1,9 +1,10 @@
 export interface LoginResponse {
     user: {
         id: string,
-        fullName: string | null,
+        fullName: string,
         phoneNumber: string,
         firebaseId: string | null,
+        email: string,
         createdAt: string
         updatedAt: string
     },

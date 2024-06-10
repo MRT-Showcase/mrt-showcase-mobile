@@ -33,6 +33,8 @@ const Login: React.FC<Props> = ({navigation}) => {
             return
         }
 
+        console.log(user);
+
         setLoading(true);
         let json = await customFetch<{
             isPhoneNumberValid: boolean;
@@ -67,7 +69,7 @@ const Login: React.FC<Props> = ({navigation}) => {
     };
 
     const goToSignUp = () => {
-        navigation.navigate("SignUp");
+        navigation.navigate("Register");
     };
 
     const signInWithGoogle = () => {

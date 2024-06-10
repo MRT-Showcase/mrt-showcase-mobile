@@ -1,5 +1,5 @@
 import {Text, View} from "react-native";
-import {Button} from "react-native-paper";
+import {ActivityIndicator, Button} from "react-native-paper";
 import OTPInput from "../../components/OTPInput";
 import {AppStackNavigationProp} from "../../navigation/interface";
 import React from "react";
@@ -7,6 +7,8 @@ import {useUserStore} from "../../zustand-store/user";
 import {LoginResponse} from "./interface";
 import {User} from "../../zustand-store/type/user";
 import customFetch from "../../helper/customFetch";
+import {useDispatch} from "react-redux";
+import {setMessage} from "../../store/slices/snackbar";
 
 type Props = {
     navigation: AppStackNavigationProp<"OTP">;
@@ -14,12 +16,16 @@ type Props = {
 
 const OTPScreen: React.FC<Props> = ({navigation}) => {
     const {phoneNumber} = useUserStore()
+    const dispatch = useDispatch()
+    const [loading, setLoading] = React.useState<boolean>(false);
     const setUser = useUserStore((state) => state.setUser);
     const handleCodeFilled = async (code: string) => {
 
         if (!phoneNumber) {
             navigation.replace("Login");
         }
+
+        setLoading(true);
 
 
         let response = await customFetch<LoginResponse>("/auth/login/pin", {
@@ -30,15 +36,19 @@ const OTPScreen: React.FC<Props> = ({navigation}) => {
             }),
         });
 
+        setLoading(false);
+
         let user: User = {
             id: response.data.user.id,
             fullName: response.data.user.fullName,
             phoneNumber: response.data.user.phoneNumber,
             token: response.data.token,
+            email: response.data.user.email
         }
-        
         setUser(user);
         navigation.popToTop()
+        navigation.navigate("Home");
+        return dispatch(setMessage(`Sukses login. Halo ${user.fullName}`))
     };
 
     return (
@@ -66,6 +76,18 @@ const OTPScreen: React.FC<Props> = ({navigation}) => {
                 length={6}
                 onCodeFilled={handleCodeFilled}
             />
+
+            {loading && (
+                <View
+                    style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                    }}
+                >
+                    <ActivityIndicator size="large" color="#0000ff"/>
+                </View>
+            )}
 
             <View
                 style={{
