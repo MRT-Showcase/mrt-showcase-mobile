@@ -3,6 +3,7 @@ import {AppStackNavigationProp} from "../../navigation/interface";
 import {Button, TextInput} from "react-native-paper";
 import {useState} from "react";
 import {useUserStore} from "../../zustand-store/user";
+import customFetch from "../../helper/customFetch";
 
 type Props = {
     navigation: AppStackNavigationProp<"Login">;
@@ -33,27 +34,16 @@ const Login: React.FC<Props> = ({navigation}) => {
         }
 
         setLoading(true);
-        let request = await fetch("https://mrtftui-be.fly.dev/auth/validate", {
+        let json = await customFetch<{
+            isPhoneNumberValid: boolean;
+        }>("/auth/validate", {
             method: "POST",
             body: JSON.stringify({
                 phoneNumber: phone,
             }),
-            headers: {
-                "Content-Type": "application/json",
-            },
         });
 
         setLoading(false)
-        let json = (await request.json()) as {
-            data: {
-                isPhoneNumberValid: boolean;
-            }
-            message: string;
-            statusCode: number;
-            success: boolean;
-        };
-
-        console.log(json);
 
         if (!json.success) {
             setErrorMessage({
@@ -70,7 +60,7 @@ const Login: React.FC<Props> = ({navigation}) => {
             });
             return
         }
-
+        setErrorMessage(undefined);
         setPhoneNumber(phone);
 
         goToOTPInputPage();

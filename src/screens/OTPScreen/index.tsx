@@ -6,6 +6,7 @@ import React from "react";
 import {useUserStore} from "../../zustand-store/user";
 import {LoginResponse} from "./interface";
 import {User} from "../../zustand-store/type/user";
+import customFetch from "../../helper/customFetch";
 
 type Props = {
     navigation: AppStackNavigationProp<"OTP">;
@@ -21,24 +22,21 @@ const OTPScreen: React.FC<Props> = ({navigation}) => {
         }
 
 
-        let request = await fetch("https://mrtftui-be.fly.dev/auth/login/pin", {
+        let response = await customFetch<LoginResponse>("/auth/login/pin", {
             method: "POST",
             body: JSON.stringify({
                 phoneNumber: phoneNumber,
                 pin: code,
             }),
-            headers: {
-                "Content-Type": "application/json",
-            },
         });
-        let response = await request.json() as LoginResponse;
-        
+
         let user: User = {
             id: response.data.user.id,
             fullName: response.data.user.fullName,
             phoneNumber: response.data.user.phoneNumber,
             token: response.data.token,
         }
+        
         setUser(user);
         navigation.popToTop()
     };
