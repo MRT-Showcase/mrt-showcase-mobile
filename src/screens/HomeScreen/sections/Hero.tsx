@@ -1,5 +1,6 @@
 import { Image, Text, View } from "react-native";
 import { Button, IconButton } from "react-native-paper";
+import NavigationPick from "./NavigationPick";
 
 const Hero = () => {
   const nama: string | undefined = "Rasyid";
@@ -82,14 +83,7 @@ const Hero = () => {
         </Text>
       </View>
 
-      <View
-        style={{
-          backgroundColor: "white",
-          height: 230,
-          marginTop: 12,
-          borderRadius: 25,
-        }}
-      ></View>
+      <NavigationPick />
     </View>
   );
 };

@@ -10,6 +10,7 @@ const HomeScreen = () => (
     <View
       style={{
         gap: 30,
+        backgroundColor: "white",
       }}
     >
       <Hero />
