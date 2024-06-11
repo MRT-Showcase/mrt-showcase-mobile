@@ -199,6 +199,7 @@ const styles = StyleSheet.create({
         borderColor: "#E5EDF7",
         borderRadius: 10,
         backgroundColor: "transparent",
+        color: 'black',
     },
     errorText: {
         color: "red",

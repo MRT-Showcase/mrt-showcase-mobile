@@ -238,8 +238,6 @@ const DetailBeritaScreen: React.FC<Props> = ({route, navigation}) => {
                                                }}
                                                scrollEnabled={false}
                                                onSelectionChange={handleSelectionChange}
-                                               selectTextOnFocus={false}
-                                               readOnly={true}
                                     >{data.content}</TextInput>
                                     <View style={{height: 250}}/>
                                 </View>
