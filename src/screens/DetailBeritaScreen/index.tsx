@@ -115,9 +115,6 @@ const DetailBeritaScreen: React.FC<Props> = ({route, navigation}) => {
             fetchSelectedWord(selection).then()
         }
     }, [selection])
-    const handleKeyPress = (e: any) => {
-        e.preventDefault();
-    };
     const playSound = async ({uri}: { uri: string }) => {
         await Audio.setAudioModeAsync({
             playsInSilentModeIOS: true,
