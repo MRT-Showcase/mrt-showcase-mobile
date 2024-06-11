@@ -4,6 +4,7 @@ import {
     StatusBar,
     StyleSheet,
     Text,
+    TouchableOpacity,
     View
 } from "react-native";
 import React from "react";
@@ -74,15 +75,25 @@ const BeritaScreen: React.FC<Props> = ({navigation}) => {
                                 isPending ? <ActivityIndicator/> : (
                                     data && data.length > 0 ? (
                                         data.map((item, index) => (
-                                            <View style={{
-                                                flexDirection: "column",
-                                                display: "flex",
-                                                width: "100%",
-                                                borderRadius: 10,
-                                                overflow: "hidden",
-                                                borderColor: "#E5EDF7",
-                                                borderWidth: 1,
-                                            }} key={index}>
+                                            <TouchableOpacity
+                                                onPress={() => navigation.navigate("DetailBerita", {
+                                                    id: item.id,
+                                                    title: item.title,
+                                                })}
+                                                style={
+                                                    {
+                                                        flexDirection: "column",
+                                                        display: "flex",
+                                                        width: "100%",
+                                                        borderRadius: 10,
+                                                        overflow: "hidden",
+                                                        borderColor: "#E5EDF7",
+                                                        borderWidth: 1,
+                                                    }
+                                                }
+                                                key={item.id}
+                                            >
+
                                                 <Image
                                                     source={
                                                         {uri: item.headerUrl}
@@ -102,8 +113,8 @@ const BeritaScreen: React.FC<Props> = ({navigation}) => {
                                                     </Text>
 
                                                 </View>
-
-                                            </View>))
+                                            </TouchableOpacity>
+                                        ))
                                     ) : (
                                         <Text>Tidak ada berita yang
                                             tersedia</Text>
