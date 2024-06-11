@@ -5,7 +5,7 @@ import {
 import {RouteProp} from "@react-navigation/native";
 import {ArticleDetail, fetchArticleDetail} from "../../lib/api/article";
 import {useQuery} from "@tanstack/react-query";
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {useRefreshOnFocus} from "../../hooks/useRefreshOnFocus";
 import {
     Image,
@@ -16,10 +16,19 @@ import {
     TextInput,
     View
 } from "react-native";
-import {ActivityIndicator, Appbar, IconButton, Modal} from "react-native-paper";
+import {
+    ActivityIndicator,
+    Appbar,
+    Button,
+    IconButton,
+    Modal
+} from "react-native-paper";
 import customFetch from "../../helper/customFetch";
 import {useDispatch} from "react-redux";
 import {setMessage} from "../../store/slices/snackbar";
+import {useUserStore} from "../../zustand-store/user";
+import {Audio} from 'expo-av';
+
 
 type Props = {
     navigation: AppStackNavigationProp<"DetailBerita">;
@@ -28,7 +37,7 @@ type Props = {
 }
 
 const DetailBeritaScreen: React.FC<Props> = ({route, navigation}) => {
-    let {isPending, error, data, refetch} = useQuery<ArticleDetail, Error>({
+    let {isPending, data, refetch} = useQuery<ArticleDetail, Error>({
         queryKey: ["articleDetail"],
         queryFn: () => fetchArticleDetail({
             id: route.params.id
@@ -39,6 +48,9 @@ const DetailBeritaScreen: React.FC<Props> = ({route, navigation}) => {
     let [isLoading, setIsLoading] = React.useState(false);
     let [synonym, setSynonym] = React.useState<string[] | undefined>(undefined);
     let [synonymModal, setSynonymModal] = React.useState(false);
+    let {isDyslexic} = useUserStore();
+    let [sound, setSound] = useState<Audio.Sound | undefined>();
+    let [isPlaying, setIsPlaying] = useState<boolean>(false);
 
     function handleSelectionChange(e: any) {
         const {selection: {start, end}} = e.nativeEvent;
@@ -101,13 +113,44 @@ const DetailBeritaScreen: React.FC<Props> = ({route, navigation}) => {
                 dispatch(setMessage("Terjadi kesalahan, silahkan coba lagi"));
             }
         }
-
-
         if (selection) {
-            fetchSelectedWord(selection).then(r => {
-            })
+            fetchSelectedWord(selection).then()
         }
     }, [selection])
+
+    const playSound = async ({uri}: { uri: string }) => {
+        await Audio.setAudioModeAsync({
+            playsInSilentModeIOS: true,
+        });
+
+        if (isPlaying) {
+            console.log('Pausing Sound');
+            if (sound) {
+                await sound.pauseAsync();
+            }
+            setIsPlaying(false);
+            return;
+        }
+
+        if (!sound) {
+            const {sound: newSound} = await Audio.Sound.createAsync({uri: uri});
+            setSound(newSound);
+            setIsPlaying(true);
+            await newSound.playAsync();
+        } else {
+            setIsPlaying(true);
+            await sound.playAsync();
+        }
+    };
+
+    useEffect(() => {
+        return () => {
+            if (sound) {
+                console.log('Unloading Sound');
+                sound.unloadAsync();
+            }
+        };
+    }, [sound]);
 
     useRefreshOnFocus(refetch)
     return (
@@ -150,6 +193,12 @@ const DetailBeritaScreen: React.FC<Props> = ({route, navigation}) => {
                                 flex: 1,
 
                             }}>
+                                {data.textToSpeechUrl && (
+                                    <Button
+                                        onPress={() => playSound({uri: data.textToSpeechUrl!})}>
+                                        {isPlaying ? "Berhenti" : "Mulai Audio"}
+                                    </Button>
+                                )}
                                 <View style={{
                                     paddingLeft: 5,
                                     paddingRight: 5,
