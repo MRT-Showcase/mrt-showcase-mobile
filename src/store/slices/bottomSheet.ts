@@ -1,26 +1,25 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ReactNode } from "react";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 interface BottomSheetState {
-  children: ReactNode | undefined;
+    componentKey: string | null;
 }
 
 const initialState: BottomSheetState = {
-  children: undefined,
+    componentKey: null,
 };
 
 const bottomSheetSlice = createSlice({
-  name: "bottomSheet",
-  initialState,
-  reducers: {
-    setBottomSheet: (state, action: PayloadAction<ReactNode>) => {
-      state.children = action.payload;
+    name: "bottomSheet",
+    initialState,
+    reducers: {
+        setBottomSheet: (state, action: PayloadAction<string>) => {
+            state.componentKey = action.payload;
+        },
+        removeBottomSheet: (state) => {
+            state.componentKey = null;
+        },
     },
-    removeBottomSheet: (state) => {
-      state.children = undefined;
-    },
-  },
 });
 
-export const { setBottomSheet, removeBottomSheet } = bottomSheetSlice.actions;
+export const {setBottomSheet, removeBottomSheet} = bottomSheetSlice.actions;
 export default bottomSheetSlice.reducer;
