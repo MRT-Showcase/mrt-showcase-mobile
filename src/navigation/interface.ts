@@ -9,6 +9,10 @@ export type AppStackParamList = {
     UserTab: undefined;
     Home: undefined;
     Berita: undefined;
+    DetailBerita: {
+        id: string;
+        title: string;
+    };
 };
 
 export type AppStackNavigationProp<T extends keyof AppStackParamList> =

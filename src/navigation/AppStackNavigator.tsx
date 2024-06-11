@@ -8,6 +8,7 @@ import {CreatePin} from "../screens/CreatePin";
 import {ConfirmPin} from "../screens/ConfirmPin";
 import UserStackNavigator from "./UserStackNavigator";
 import BeritaScreen from "../screens/BeritaScreen";
+import DetailBeritaScreen from "../screens/DetailBeritaScreen";
 
 const Stack = createNativeStackNavigator<AppStackParamList>(); // TODO: generic
 
@@ -70,6 +71,15 @@ const AppStackNavigator = () => (
         <Stack.Screen
             name="Berita"
             component={BeritaScreen}
+            options={{
+                headerShown: false,
+            }
+            }
+        />
+
+        <Stack.Screen
+            name="DetailBerita"
+            component={DetailBeritaScreen}
             options={{
                 headerShown: false,
             }
