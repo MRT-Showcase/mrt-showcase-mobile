@@ -4,41 +4,43 @@ import MenuProfil from "./sections/MenuProfil";
 import Umum from "./sections/Umum";
 import { Button } from "react-native-paper";
 
-const ProfileScreen = () => (
-  <ScrollView>
-    <View
-      style={{
-        backgroundColor: "white",
-      }}
-    >
-      <Hero />
+const ProfileScreen = () => {
+  return (
+    <ScrollView>
       <View
         style={{
-          padding: 20,
-          gap: 20,
+          backgroundColor: "white",
         }}
       >
-        <MenuProfil />
-        <Umum />
-        <Button
+        <Hero />
+        <View
           style={{
-            backgroundColor: "#FAE5EA",
-            borderRadius: 10,
+            padding: 20,
+            gap: 20,
           }}
         >
-          <Text
+          <MenuProfil />
+          <Umum />
+          <Button
             style={{
-              color: "#DD0000",
-              fontSize: 16,
-              fontWeight: "bold",
+              backgroundColor: "#FAE5EA",
+              borderRadius: 10,
             }}
           >
-            Keluar
-          </Text>
-        </Button>
+            <Text
+              style={{
+                color: "#DD0000",
+                fontSize: 16,
+                fontWeight: "bold",
+              }}
+            >
+              Keluar
+            </Text>
+          </Button>
+        </View>
       </View>
-    </View>
-  </ScrollView>
-);
+    </ScrollView>
+  );
+};
 
 export default ProfileScreen;

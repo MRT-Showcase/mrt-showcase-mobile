@@ -4,4 +4,5 @@ export interface Item {
   icon: ImageSourcePropType;
   title: string;
   description?: string;
+  onPress?: () => void;
 }

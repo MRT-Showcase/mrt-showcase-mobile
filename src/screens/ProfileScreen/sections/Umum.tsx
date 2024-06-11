@@ -2,8 +2,14 @@ import { View, Text } from "react-native";
 import { Item } from "../../../components/ProfileItem/interface";
 import ProfileItem from "../../../components/ProfileItem";
 import { Divider } from "react-native-paper";
+import { useDispatch } from "react-redux";
+import { setMessage } from "../../../store/slices/snackbar";
+import { setBottomSheet } from "../../../store/slices/bottomSheet";
+import BottomSheetDyslexia from "../../../components/BottomSheetDyslexia";
 
 const Umum = () => {
+  const dispatch = useDispatch();
+
   const items: Item[] = [
     {
       icon: require("../../../../assets/language-1.png"),
@@ -14,6 +20,9 @@ const Umum = () => {
       icon: require("../../../../assets/dyslexia-1.png"),
       title: "Mode Dyslexia",
       description: "Mode ini menyederhanakan tampilan aplikasi",
+      onPress: () => {
+        dispatch(setBottomSheet(<BottomSheetDyslexia />));
+      },
     },
     {
       icon: require("../../../../assets/scroll-1.png"),
@@ -49,12 +58,13 @@ const Umum = () => {
           gap: 13,
         }}
       >
-        {items.map(({ title, icon, description }, index) => (
+        {items.map(({ title, icon, description, onPress }, index) => (
           <>
             <ProfileItem
               icon={icon}
               title={title}
               description={description}
+              onPress={onPress}
               key={index}
             />
             {index !== items.length - 1 && <Divider />}

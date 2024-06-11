@@ -1,42 +1,54 @@
 import { Image, ImageSourcePropType, Text, View } from "react-native";
 import { Item } from "./interface";
+import { TouchableHighlight } from "react-native";
+import { useDispatch } from "react-redux";
+import { setMessage } from "../../store/slices/snackbar";
 
 interface Props extends Item {}
 
-const ProfileItem: React.FC<Props> = ({ icon, title, description }) => (
-  <View
-    style={{
-      flexDirection: "row",
-      gap: 22,
-      alignItems: "center",
-    }}
+const ProfileItem: React.FC<Props> = ({
+  icon,
+  title,
+  description,
+  onPress,
+}) => (
+  <TouchableHighlight
+    onPress={onPress}
+    underlayColor="#00000011"
   >
-    <Image source={icon} />
-
     <View
       style={{
-        gap: 3,
+        flexDirection: "row",
+        gap: 22,
+        alignItems: "center",
       }}
     >
-      <Text
+      <Image source={icon} />
+
+      <View
         style={{
-          fontSize: 15,
-          fontWeight: "bold",
+          gap: 3,
         }}
       >
-        {title}
-      </Text>
-      {description && (
         <Text
           style={{
-            fontWeight: 100,
+            fontSize: 15,
+            fontWeight: "bold",
           }}
         >
-          {description}
+          {title}
         </Text>
-      )}
+        {description && (
+          <Text
+            style={{
+              fontWeight: 100,
+            }}
+          >
+            {description}
+          </Text>
+        )}
+      </View>
     </View>
-  </View>
+  </TouchableHighlight>
 );
-
 export default ProfileItem;
