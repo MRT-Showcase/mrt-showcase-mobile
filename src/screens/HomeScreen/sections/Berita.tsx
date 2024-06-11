@@ -63,7 +63,7 @@ const Berita: React.FC<props> = ({navigation}) => {
                 >
                     {
                         isPending ? <ActivityIndicator/> : (
-                            data && data.length > 0 ? (
+                            data && data.length > 0 && !error ? (
                                 data.map((item, index) => (
                                     <View style={{
                                         flexDirection: "column",
