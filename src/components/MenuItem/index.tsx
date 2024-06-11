@@ -1,33 +1,82 @@
 import React from "react";
-import { Text, View } from "react-native";
+import {
+  Image,
+  ImageSourcePropType,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
+import { useUserStore } from "../../zustand-store/user";
+import { useDispatch } from "react-redux";
+import { setBottomSheet } from "../../store/slices/bottomSheet";
+import BottomSheetEditWidget from "../BottomSheetEditWidget";
+import { useDisplayWidgets } from "../../zustand-store/displayWidget";
 
 type Props = {
   title: string;
-  isDyslexic?: boolean;
+  image: ImageSourcePropType;
+  id: number;
 };
 
-const MenuItem: React.FC<Props> = ({ title, isDyslexic = false }) => (
-  <View
-    style={{
-      alignItems: "center",
-      gap: 2,
-    }}
-  >
+const MenuItem: React.FC<Props> = ({ title, image, id }) => {
+  const editMode = useSelector(
+    (state: RootState) => state.homeDyslexic.editMode
+  );
+  const isDyslexic = useUserStore((state) => state.isDyslexic);
+  const dispatch = useDispatch();
+  const setTargetId = useDisplayWidgets((state) => state.setTargetId);
+
+  const showAllWidgetsModal = () => {
+    setTargetId(id);
+    dispatch(setBottomSheet(<BottomSheetEditWidget />));
+  };
+
+  return (
     <View
       style={{
-        backgroundColor: "red",
-        width: isDyslexic ? 112 : 79,
-        height: isDyslexic ? 134 : 80,
-      }}
-    ></View>
-    <Text
-      style={{
-        fontSize: isDyslexic ? 18 : 9,
+        alignItems: "center",
+        gap: 2,
       }}
     >
-      {title}
-    </Text>
-  </View>
-);
+      <Image
+        source={require("../../../assets/menu-mrt/tiket.png")}
+        style={{
+          width: isDyslexic ? 112 : 79,
+          height: isDyslexic ? 134 : 80,
+        }}
+      />
+      {editMode && isDyslexic && (
+        <TouchableOpacity
+          onPress={showAllWidgetsModal}
+          style={{
+            position: "absolute",
+            right: -5,
+            top: -5,
+          }}
+        >
+          <View
+            style={{
+              backgroundColor: "#46B54C",
+              borderRadius: 5,
+              width: 25,
+              height: 25,
+            }}
+          >
+            <Image source={require("../../../assets/replace.png")} />
+          </View>
+        </TouchableOpacity>
+      )}
+      <Text
+        style={{
+          fontSize: isDyslexic ? 18 : 9,
+        }}
+      >
+        {title}
+      </Text>
+    </View>
+  );
+};
 
 export default MenuItem;

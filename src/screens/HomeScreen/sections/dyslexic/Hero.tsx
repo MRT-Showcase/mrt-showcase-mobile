@@ -1,8 +1,15 @@
-import { Image, Text, View } from "react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import NavigationPick from "./NavigationPick";
+import { useDispatch } from "react-redux";
+import { toggleEditMode as toggleEditModeRedux } from "../../../../store/slices/homeDyslexic";
 
 const Hero = ({ name }: { name: string | null | undefined }) => {
   const poin: number = 100;
+  const dispatch = useDispatch();
+
+  const toggleEditMode = () => {
+    dispatch(toggleEditModeRedux());
+  };
 
   return (
     <View
@@ -51,9 +58,11 @@ const Hero = ({ name }: { name: string | null | undefined }) => {
             gap: 12,
           }}
         >
-          <Image
-            source={require("../../../../../assets/registered-user.png")}
-          />
+          <TouchableOpacity onPress={toggleEditMode}>
+            <Image
+              source={require("../../../../../assets/registered-user.png")}
+            />
+          </TouchableOpacity>
           <Image
             source={require("../../../../../assets/notification-button.png")}
           />

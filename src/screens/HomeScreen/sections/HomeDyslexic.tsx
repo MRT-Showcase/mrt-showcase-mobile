@@ -21,6 +21,7 @@ const HomeDyslexic = ({ navigation }: Props) => {
       <View
         style={{
           gap: 14,
+          backgroundColor: "white",
         }}
       >
         <Hero name={user?.fullName} />

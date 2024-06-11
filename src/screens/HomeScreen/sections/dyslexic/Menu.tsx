@@ -1,23 +1,15 @@
 import { Image, ScrollView, View } from "react-native";
 import TitleAndDescription from "../../../../components/TitleAndDescription";
 import MenuItem from "../../../../components/MenuItem";
+import { menuItems } from "../../../../constants/menuItem";
+import { useDisplayWidgets } from "../../../../zustand-store/displayWidget";
 
 interface MenuItem {
   title: string;
 }
 
 const Menu = () => {
-  const items: MenuItem[] = [
-    {
-      title: "Tiket",
-    },
-    {
-      title: "Jadwal",
-    },
-    {
-      title: "Stasiun",
-    },
-  ];
+  const displayWidgets = useDisplayWidgets((state) => state.displayWidgets);
 
   const menuItemContents = [
     {
@@ -50,11 +42,12 @@ const Menu = () => {
           justifyContent: "space-between",
         }}
       >
-        {items.map((item, index) => (
+        {displayWidgets.map((item, index) => (
           <MenuItem
             title={item.title}
             key={index}
-            isDyslexic
+            id={item.id}
+            image={item.image}
           />
         ))}
       </View>

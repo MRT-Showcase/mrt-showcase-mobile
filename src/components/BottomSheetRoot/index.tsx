@@ -13,6 +13,8 @@ const BottomSheetRoot = () => {
     (state: RootState) => state.bottomSheet.children
   );
 
+  const closeBottomSheet = () => dispatch(removeBottomSheet());
+
   if (children) {
     return (
       <Backdrop>
@@ -29,11 +31,12 @@ const BottomSheetRoot = () => {
             position: "absolute",
             bottom: 0,
             gap: 12,
+            maxHeight: "100%",
           }}
         >
           <TouchableHighlight
             underlayColor="transparent"
-            onPress={() => dispatch(removeBottomSheet())}
+            onPress={closeBottomSheet}
           >
             <View
               style={{
@@ -45,7 +48,7 @@ const BottomSheetRoot = () => {
             ></View>
           </TouchableHighlight>
 
-          {children}
+          <View>{children}</View>
         </View>
       </Backdrop>
     );

@@ -19,7 +19,6 @@ const BottomSheetDyslexia = () => {
   };
 
   const submit = () => {
-    // TODO: set dyslexia logic here
     setIsUserDyslexic(isDyslexicState);
 
     closeBottomSheet();
