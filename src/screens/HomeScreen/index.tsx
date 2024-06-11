@@ -16,7 +16,7 @@ type Props = {
 };
 
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
-  const isDyslexic = true;
+  const isDyslexic = true; // TODO: ambil dari provider or asyn storage
   if (isDyslexic) {
     return <HomeDyslexic navigation={navigation} />;
   } else {
