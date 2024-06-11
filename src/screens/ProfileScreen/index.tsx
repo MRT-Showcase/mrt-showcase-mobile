@@ -4,9 +4,12 @@ import MenuProfil from "./sections/MenuProfil";
 import Umum from "./sections/Umum";
 import { Button } from "react-native-paper";
 import { useUserStore } from "../../zustand-store/user";
+import { useNavigation } from "@react-navigation/native";
+import { AppStackNavigationProp } from "../../navigation/interface";
 
 const ProfileScreen = () => {
   const deleteUser = useUserStore((state) => state.deleteUser);
+  const navigation = useNavigation<AppStackNavigationProp<"UserTab">>();
 
   return (
     <ScrollView>
@@ -29,7 +32,10 @@ const ProfileScreen = () => {
               backgroundColor: "#FAE5EA",
               borderRadius: 10,
             }}
-            onPress={() => deleteUser()}
+            onPress={() => {
+              deleteUser();
+              navigation.navigate("Login");
+            }}
           >
             <Text
               style={{
