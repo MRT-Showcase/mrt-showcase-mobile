@@ -23,6 +23,7 @@ const PromoGayaHidup = () => {
       <TitleAndDescription
         title="Promo Gaya Hidup"
         description="Tingkatkan gaya hidup kamu lebih baik"
+        isDyslexic
       />
 
       <ScrollView

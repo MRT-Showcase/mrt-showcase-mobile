@@ -22,6 +22,7 @@ const PromoTiketFeeder = () => {
       <TitleAndDescription
         title="Promo Tiket & Feeder"
         description="Untuk perjalanan lebih hemat dan mudah"
+        isDyslexic
       />
 
       <ScrollView

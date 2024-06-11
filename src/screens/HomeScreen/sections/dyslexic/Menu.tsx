@@ -17,27 +17,6 @@ const Menu = () => {
     {
       title: "Stasiun",
     },
-    {
-      title: "Tenant",
-    },
-    {
-      title: "Event",
-    },
-    {
-      title: "Diskon Voucher",
-    },
-    {
-      title: "Podcast",
-    },
-    {
-      title: "Berita",
-    },
-    {
-      title: "TV & Film",
-    },
-    {
-      title: "Lainnya",
-    },
   ];
 
   const menuItemContents = [
@@ -60,6 +39,7 @@ const Menu = () => {
       <TitleAndDescription
         title="Menu MyMRTJ"
         description="Nikmati berbagai fitur kami untuk mobilitas & gaya hidup kamu!"
+        isDyslexic
       />
 
       <View
@@ -74,6 +54,7 @@ const Menu = () => {
           <MenuItem
             title={item.title}
             key={index}
+            isDyslexic
           />
         ))}
       </View>
