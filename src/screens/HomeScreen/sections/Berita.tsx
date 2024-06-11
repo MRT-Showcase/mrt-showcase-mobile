@@ -1,4 +1,4 @@
-import {Image, ScrollView, Text, View} from "react-native";
+import {Image, ScrollView, Text, TouchableOpacity, View} from "react-native";
 import React from "react";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {useQuery} from "@tanstack/react-query";
@@ -65,7 +65,7 @@ const Berita: React.FC<props> = ({navigation}) => {
                         isPending ? <ActivityIndicator/> : (
                             data && data.length > 0 && !error ? (
                                 data.map((item, index) => (
-                                    <View style={{
+                                    <TouchableOpacity style={{
                                         flexDirection: "column",
                                         display: "flex",
                                         width: 250,
@@ -74,7 +74,15 @@ const Berita: React.FC<props> = ({navigation}) => {
                                         overflow: "hidden",
                                         borderColor: "#E5EDF7",
                                         borderWidth: 1,
-                                    }} key={index}>
+
+                                    }} key={index}
+
+
+                                                      onPress={() => navigation.navigate("DetailBerita", {
+                                                          id: item.id,
+                                                          title: item.title,
+                                                      })}
+                                    >
                                         <Image
                                             source={
                                                 {uri: item.headerUrl}
@@ -95,7 +103,7 @@ const Berita: React.FC<props> = ({navigation}) => {
 
                                         </View>
 
-                                    </View>))
+                                    </TouchableOpacity>))
                             ) : (
                                 <Text>Tidak ada berita yang
                                     tersedia</Text>
