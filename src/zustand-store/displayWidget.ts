@@ -41,7 +41,7 @@ export const useDisplayWidgetsStore = create<DisplayWidgetState>()(
       removeTargetId: () => set({ targetId: undefined }),
     }),
     {
-      name: "widget-storag",
+      name: "widget-stora",
       storage: createJSONStorage(() => AsyncStorage),
     }
   )

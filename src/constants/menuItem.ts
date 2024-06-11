@@ -31,31 +31,31 @@ export const menuItems: IMenuItem[] = [
   {
     id: 4,
     title: "Event",
-    image: require("../../assets/menu-mrt/tiket.png"),
+    image: require("../../assets/menu-mrt/event.png"),
   },
   {
     id: 5,
     title: "Diskon Voucher",
-    image: require("../../assets/menu-mrt/tiket.png"),
+    image: require("../../assets/menu-mrt/diskon.png"),
   },
   {
     id: 6,
     title: "Podcast",
-    image: require("../../assets/menu-mrt/tiket.png"),
+    image: require("../../assets/menu-mrt/podcast.png"),
   },
   {
     id: 7,
     title: "Berita",
-    image: require("../../assets/menu-mrt/tiket.png"),
+    image: require("../../assets/menu-mrt/berita.png"),
   },
   {
     id: 8,
     title: "TV & Film",
-    image: require("../../assets/menu-mrt/tiket.png"),
+    image: require("../../assets/menu-mrt/tv.png"),
   },
   {
     id: 9,
-    title: "Lainnya",
-    image: require("../../assets/menu-mrt/tiket.png"),
+    title: "Sekitar",
+    image: require("../../assets/menu-mrt/sekitar.png"),
   },
 ];

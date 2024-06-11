@@ -1,5 +1,6 @@
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, Image } from "react-native";
 import TitleAndDescription from "../../../components/TitleAndDescription";
+import { gayaHidup } from "../../../constants/gayaHidup";
 
 const GayaHidup = () => (
   <View
@@ -24,8 +25,8 @@ const GayaHidup = () => (
           gap: 14,
         }}
       >
-        {[1, 2, 3, 4, 5, 6].map((value, index) => (
-          <View
+        {gayaHidup.map((value, index) => (
+          <Image
             key={index}
             style={{
               width: 62,
@@ -33,7 +34,8 @@ const GayaHidup = () => (
               backgroundColor: "red",
               borderRadius: 6,
             }}
-          ></View>
+            source={value.image}
+          />
         ))}
       </View>
     </ScrollView>

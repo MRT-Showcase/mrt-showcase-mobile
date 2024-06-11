@@ -6,9 +6,12 @@ import { useDispatch } from "react-redux";
 import { setMessage } from "../../../store/slices/snackbar";
 import { setBottomSheet } from "../../../store/slices/bottomSheet";
 import BottomSheetDyslexia from "../../../components/BottomSheetDyslexia";
+import { useUserStore } from "../../../zustand-store/user";
+import BottomSheetAudio from "../../../components/BottomSheetAudio";
 
 const Umum = () => {
   const dispatch = useDispatch();
+  const isDyslexic = useUserStore((state) => state.isDyslexic);
 
   const items: Item[] = [
     {
@@ -68,6 +71,17 @@ const Umum = () => {
               key={index}
             />
             {index !== items.length - 1 && <Divider />}
+            {title == "Mode Dyslexia" && isDyslexic && (
+              <>
+                <ProfileItem
+                  icon={require("../../../../assets/audio-1.png")}
+                  title={"Pembaca Teks"}
+                  description={"Fitur akan membacakan teks pada layar"}
+                  onPress={() => dispatch(setBottomSheet(<BottomSheetAudio />))}
+                />
+                {index !== items.length - 1 && <Divider />}
+              </>
+            )}
           </>
         ))}
       </View>

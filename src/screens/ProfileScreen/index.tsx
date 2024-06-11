@@ -3,8 +3,11 @@ import Hero from "./sections/Hero";
 import MenuProfil from "./sections/MenuProfil";
 import Umum from "./sections/Umum";
 import { Button } from "react-native-paper";
+import { useUserStore } from "../../zustand-store/user";
 
 const ProfileScreen = () => {
+  const deleteUser = useUserStore((state) => state.deleteUser);
+
   return (
     <ScrollView>
       <View
@@ -26,6 +29,7 @@ const ProfileScreen = () => {
               backgroundColor: "#FAE5EA",
               borderRadius: 10,
             }}
+            onPress={() => deleteUser()}
           >
             <Text
               style={{
