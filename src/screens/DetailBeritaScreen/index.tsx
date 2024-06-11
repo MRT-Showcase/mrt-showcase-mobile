@@ -195,8 +195,19 @@ const DetailBeritaScreen: React.FC<Props> = ({route, navigation}) => {
                             }}>
                                 {data.textToSpeechUrl && (
                                     <Button
-                                        onPress={() => playSound({uri: data.textToSpeechUrl!})}>
-                                        {isPlaying ? "Berhenti" : "Mulai Audio"}
+                                        onPress={() => playSound({uri: data.textToSpeechUrl!})}
+                                        style={{
+                                            marginTop: 20,
+                                            backgroundColor: "#0055B8",
+                                        }}
+                                    >
+                                        <Text style={{
+                                            color: "#F0C401",
+                                            fontSize: 16,
+                                            fontWeight: "bold",
+                                        }}>
+                                            {isPlaying ? "Berhenti" : "Mulai Audio"}
+                                        </Text>
                                     </Button>
                                 )}
                                 <View style={{
