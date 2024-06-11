@@ -7,6 +7,7 @@ import OTPScreen from "../screens/OTPScreen";
 import { CreatePin } from "../screens/CreatePin";
 import { ConfirmPin } from "../screens/ConfirmPin";
 import UserStackNavigator from "./UserStackNavigator";
+import BeritaScreen from "../screens/BeritaScreen";
 
 const Stack = createNativeStackNavigator<AppStackParamList>(); // TODO: generic
 

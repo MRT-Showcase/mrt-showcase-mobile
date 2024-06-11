@@ -13,7 +13,7 @@ type props = {
 
 const Berita: React.FC<props> = ({navigation}) => {
     const handleRedirect = (navigation: StackNavigationProp<AppStackParamList>) => {
-        navigation.navigate('Login');
+        navigation.navigate('Berita');
     };
 
     return (
@@ -37,16 +37,17 @@ const Berita: React.FC<props> = ({navigation}) => {
                     style={{
                         flexDirection: "row",
                         gap: 14,
-                        borderRadius: 10,
-                        overflow: "hidden",
-                        borderColor: "#E5EDF7",
-                        borderWidth: 1,
                     }}
                 >
                     <View style={{
                         flexDirection: "column",
                         display: "flex",
                         width: 250,
+                        gap: 14,
+                        borderRadius: 10,
+                        overflow: "hidden",
+                        borderColor: "#E5EDF7",
+                        borderWidth: 1,
                     }}>
                         <Image
                             source={require("../../../../assets/menu-mrt/1.png")}
