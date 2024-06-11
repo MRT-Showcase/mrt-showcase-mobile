@@ -85,9 +85,6 @@ const Login: React.FC<Props> = ({navigation}) => {
         navigation.navigate("Register");
     };
 
-    const signInWithGoogle = () => {
-        // TODO
-    };
 
     return (
         <View style={styles.container}>
@@ -141,14 +138,6 @@ const Login: React.FC<Props> = ({navigation}) => {
                         <Text style={styles.signUpText}>Daftar disini</Text>
                     </Button>
                 </View>
-                <Button
-                    mode="outlined"
-                    style={styles.googleButton}
-                    icon={require("../../../assets/google.png")}
-                >
-                    <Text style={styles.googleButtonText}>Masuk dengan
-                        Google</Text>
-                </Button>
             </View>
         </View>
     );
