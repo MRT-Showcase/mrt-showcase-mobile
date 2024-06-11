@@ -97,8 +97,6 @@ const DetailBeritaScreen: React.FC<Props> = ({route, navigation}) => {
                     }),
                 });
 
-                console.log(response);
-
                 setIsLoading(false);
 
                 if (response.data.words?.synonyms && response.data.words?.synonyms?.length > 0) {
@@ -109,7 +107,6 @@ const DetailBeritaScreen: React.FC<Props> = ({route, navigation}) => {
                         " ditemukan"));
                 }
             } catch (error) {
-                console.log(error)
                 dispatch(setMessage("Terjadi kesalahan, silahkan coba lagi"));
             }
         }
@@ -124,7 +121,6 @@ const DetailBeritaScreen: React.FC<Props> = ({route, navigation}) => {
         });
 
         if (isPlaying) {
-            console.log('Pausing Sound');
             if (sound) {
                 await sound.pauseAsync();
             }
@@ -146,7 +142,6 @@ const DetailBeritaScreen: React.FC<Props> = ({route, navigation}) => {
     useEffect(() => {
         return () => {
             if (sound) {
-                console.log('Unloading Sound');
                 sound.unloadAsync().then();
             }
         };

@@ -85,9 +85,7 @@ const Register: React.FC<Props> = ({navigation}) => {
         });
 
         setLoading(false)
-
-        console.log(json)
-
+        
         if (json.data.isUserAlreadyExists) {
             errors.globalError = json.data.message;
             hasError = true;

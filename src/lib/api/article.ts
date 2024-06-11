@@ -20,7 +20,6 @@ export type ArticleDetail = {
 }
 
 export async function fetchArticleList(): Promise<ArticleList[]> {
-    console.log("getArticleList");
     let response = await customFetch<ArticleList[]>('/articles', {
         isAuthorized: false
     })
@@ -37,7 +36,6 @@ export async function fetchArticleDetail({
                                              id: string;
                                          }
 ): Promise<ArticleDetail> {
-    console.log("getArticleDetail");
     let response = await customFetch<ArticleDetail>('/articles/' + id, {
         isAuthorized: false
     })
