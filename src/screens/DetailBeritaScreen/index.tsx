@@ -179,6 +179,7 @@ const DetailBeritaScreen: React.FC<Props> = ({route, navigation}) => {
                                                style={{
                                                    color: "black",
                                                    fontSize: 16,
+                                                   textAlign: 'justify'
                                                }}
                                                scrollEnabled={false}
                                                onSelectionChange={handleSelectionChange}
