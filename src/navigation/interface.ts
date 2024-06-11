@@ -8,6 +8,7 @@ export type AppStackParamList = {
     ConfirmPin: undefined;
     UserTab: undefined;
     Home: undefined;
+    Berita: undefined;
 };
 
 export type AppStackNavigationProp<T extends keyof AppStackParamList> =
