@@ -48,7 +48,7 @@ const DetailBeritaScreen: React.FC<Props> = ({route, navigation}) => {
     let [isLoading, setIsLoading] = React.useState(false);
     let [synonym, setSynonym] = React.useState<string[] | undefined>(undefined);
     let [synonymModal, setSynonymModal] = React.useState(false);
-    let {isDyslexic} = useUserStore();
+    let {isDyslexic, isModeSuara} = useUserStore();
     let [sound, setSound] = useState<Audio.Sound | undefined>();
     let [isPlaying, setIsPlaying] = useState<boolean>(false);
 
@@ -147,7 +147,7 @@ const DetailBeritaScreen: React.FC<Props> = ({route, navigation}) => {
         return () => {
             if (sound) {
                 console.log('Unloading Sound');
-                sound.unloadAsync();
+                sound.unloadAsync().then();
             }
         };
     }, [sound]);
@@ -193,7 +193,7 @@ const DetailBeritaScreen: React.FC<Props> = ({route, navigation}) => {
                                 flex: 1,
 
                             }}>
-                                {data.textToSpeechUrl && (
+                                {data.textToSpeechUrl && isDyslexic && isModeSuara && (
                                     <Button
                                         onPress={() => playSound({uri: data.textToSpeechUrl!})}
                                         style={{
