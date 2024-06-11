@@ -21,7 +21,7 @@ const Umum = () => {
     },
     {
       icon: require("../../../../assets/dyslexia-1.png"),
-      title: "Mode Dyslexia",
+      title: "Mode InCommute",
       description: "Mode ini menyederhanakan tampilan aplikasi",
       onPress: () => {
         dispatch(setBottomSheet(<BottomSheetDyslexia />));
@@ -71,7 +71,7 @@ const Umum = () => {
               key={index}
             />
             {index !== items.length - 1 && <Divider />}
-            {title == "Mode Dyslexia" && isDyslexic && (
+            {title == "Mode InCommute" && isDyslexic && (
               <>
                 <ProfileItem
                   icon={require("../../../../assets/audio-1.png")}
