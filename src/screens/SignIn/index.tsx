@@ -4,6 +4,8 @@ import {Button, TextInput} from "react-native-paper";
 import {useState} from "react";
 import {useUserStore} from "../../zustand-store/user";
 import customFetch from "../../helper/customFetch";
+import {useDispatch} from "react-redux";
+import {setMessage} from "../../store/slices/snackbar";
 
 type Props = {
     navigation: AppStackNavigationProp<"Login">;
@@ -19,6 +21,8 @@ const Login: React.FC<Props> = ({navigation}) => {
         error: boolean;
     } | undefined>();
 
+    const dispatch = useDispatch();
+
     const goToOTPInputPage = () => {
         navigation.navigate("OTP");
     };
@@ -33,7 +37,12 @@ const Login: React.FC<Props> = ({navigation}) => {
             return
         }
 
-        console.log(user);
+        if (user) {
+            if (user.phoneNumber === phone) {
+                navigation.navigate("Home");
+                return dispatch(setMessage(`Halo ${user.fullName}! Selamat datang`))
+            }
+        }
 
         setLoading(true);
         let json = await customFetch<{
