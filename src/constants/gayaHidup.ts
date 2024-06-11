@@ -14,4 +14,13 @@ export const gayaHidup: IGayaHidupItem[] = [
   {
     image: require("../../assets/gaya-hidup/easygo.png"),
   },
+  {
+    image: require("../../assets/gaya-hidup/rekosistem.png"),
+  },
+  {
+    image: require("../../assets/gaya-hidup/glints.png"),
+  },
+  {
+    image: require("../../assets/gaya-hidup/cakap.png"),
+  },
 ];
