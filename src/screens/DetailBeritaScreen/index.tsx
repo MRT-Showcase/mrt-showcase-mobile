@@ -9,12 +9,14 @@ import React, {useEffect, useState} from "react";
 import {useRefreshOnFocus} from "../../hooks/useRefreshOnFocus";
 import {
     Image,
+    Keyboard,
     Platform,
     ScrollView,
     StatusBar,
     StyleSheet,
     Text,
     TextInput,
+    TouchableWithoutFeedback,
     View
 } from "react-native";
 import {
@@ -230,18 +232,37 @@ const DetailBeritaScreen: React.FC<Props> = ({route, navigation}) => {
                                             borderRadius: 10,
                                         }}
                                     />
-                                    <TextInput multiline
-                                               editable={false}
-                                               contextMenuHidden={true}
-                                               selectTextOnFocus={Platform.OS !== 'ios'} // Enable selection on Android
-                                               style={{
-                                                   color: "black",
-                                                   fontSize: 16,
-                                                   textAlign: 'justify'
-                                               }}
-                                               scrollEnabled={false}
-                                               onSelectionChange={handleSelectionChange}
-                                    >{data.content}</TextInput>
+                                    {
+                                        Platform.OS !== "ios" ? (
+                                            <TouchableWithoutFeedback
+                                                onPress={Keyboard.dismiss}>
+                                                <TextInput multiline
+                                                           editable={true}
+                                                           contextMenuHidden={true}
+                                                           showSoftInputOnFocus={false}
+                                                           style={{
+                                                               color: "black",
+                                                               fontSize: 16,
+                                                               textAlign: 'justify'
+                                                           }}
+                                                           scrollEnabled={false}
+                                                           onSelectionChange={handleSelectionChange}
+                                                >{data.content}</TextInput>
+                                            </TouchableWithoutFeedback>
+                                        ) : (
+                                            <TextInput multiline
+                                                       editable={false}
+                                                       contextMenuHidden={true}
+                                                       style={{
+                                                           color: "black",
+                                                           fontSize: 16,
+                                                           textAlign: 'justify'
+                                                       }}
+                                                       scrollEnabled={false}
+                                                       onSelectionChange={handleSelectionChange}
+                                            >{data.content}</TextInput>
+                                        )
+                                    }
                                     <View style={{height: 250}}/>
                                 </View>
                             </ScrollView>
