@@ -247,6 +247,7 @@ const DetailBeritaScreen: React.FC<Props> = ({route, navigation}) => {
                                                            }}
                                                            scrollEnabled={false}
                                                            onSelectionChange={handleSelectionChange}
+                                                           value={data.content}
                                                 >{data.content}</TextInput>
                                             </TouchableWithoutFeedback>
                                         ) : (
