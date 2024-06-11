@@ -26,7 +26,6 @@ const queryClient = new QueryClient({
     defaultOptions: {queries: {retry: 2}},
 })
 
-
 export default function App() {
     useOnlineManager()
     useAppState(onAppStateChange)

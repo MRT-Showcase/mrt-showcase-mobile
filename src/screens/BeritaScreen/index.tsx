@@ -8,7 +8,10 @@ import {
 } from "react-native";
 import React from "react";
 import {AppStackNavigationProp} from "../../navigation/interface";
-import {Appbar} from 'react-native-paper';
+import {ActivityIndicator, Appbar} from 'react-native-paper';
+import {useQuery} from "@tanstack/react-query";
+import {ArticleList, fetchArticleList} from "../../lib/api/article";
+import {useRefreshOnFocus} from "../../hooks/useRefreshOnFocus";
 
 type Props = {
     navigation: AppStackNavigationProp<"Berita">;
@@ -16,6 +19,14 @@ type Props = {
 };
 
 const BeritaScreen: React.FC<Props> = ({navigation}) => {
+
+    let {isPending, error, data, refetch} = useQuery<ArticleList[], Error>({
+        queryKey: ["articleList"],
+        queryFn: fetchArticleList,
+    })
+
+    useRefreshOnFocus(refetch)
+
     return (
         <View>
             <StatusBar barStyle="light-content"/>
@@ -59,41 +70,46 @@ const BeritaScreen: React.FC<Props> = ({navigation}) => {
                             alignItems: "center",
                             gap: 20,
                         }}>
+                            {
+                                isPending ? <ActivityIndicator/> : (
+                                    data && data.length > 0 ? (
+                                        data.map((item, index) => (
+                                            <View style={{
+                                                flexDirection: "column",
+                                                display: "flex",
+                                                width: "100%",
+                                                borderRadius: 10,
+                                                overflow: "hidden",
+                                                borderColor: "#E5EDF7",
+                                                borderWidth: 1,
+                                            }} key={index}>
+                                                <Image
+                                                    source={
+                                                        {uri: item.headerUrl}
+                                                    }
+                                                    style={{
+                                                        width: "100%",
+                                                        height: 150,
+                                                        objectFit: "cover",
+                                                    }}
+                                                />
+                                                <View style={{
+                                                    padding: 10,
+                                                }}>
+                                                    <Text numberOfLines={2}
+                                                          ellipsizeMode={"tail"}>
+                                                        {item.title}
+                                                    </Text>
 
-                            <View style={{
-                                flexDirection: "column",
-                                display: "flex",
-                                width: "100%",
-                                borderRadius: 10,
-                                overflow: "hidden",
-                                borderColor: "#E5EDF7",
-                                borderWidth: 1,
-                            }}>
-                                <Image
-                                    source={require("../../../assets/menu-mrt/1.png")}
-                                    style={{
-                                        width: "100%",
-                                        height: 150,
-                                        objectFit: "cover",
-                                    }}
-                                />
+                                                </View>
 
-                                <View style={{
-                                    padding: 10,
-                                }}>
-                                    <Text numberOfLines={2}
-                                          ellipsizeMode={"tail"}>
-                                        Per 25 Mei, Pembangunan Fase 2A CP
-                                        201
-                                        Capai
-                                        77,36
-                                        Persen aslkdjfslkdfjslkfalkjsa
-                                    </Text>
-
-                                </View>
-
-                            </View>
-
+                                            </View>))
+                                    ) : (
+                                        <Text>Tidak ada berita yang
+                                            tersedia</Text>
+                                    )
+                                )
+                            }
                         </View>
                     </ScrollView>
                 </View>

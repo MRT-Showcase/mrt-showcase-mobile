@@ -1,88 +1,111 @@
-import { Image, ScrollView, Text, View } from "react-native";
+import {Image, ScrollView, Text, View} from "react-native";
 import TitleAndDescription from "../../../../components/TitleAndDescription";
 import {
-  AppStackNavigationProp,
-  AppStackParamList,
+    AppStackNavigationProp,
+    AppStackParamList,
 } from "../../../../navigation/interface";
 import React from "react";
-import { StackNavigationProp } from "@react-navigation/stack";
+import {StackNavigationProp} from "@react-navigation/stack";
+import {useQuery} from "@tanstack/react-query";
+import {ArticleList, fetchArticleList} from "../../../../lib/api/article";
+import {useRefreshOnFocus} from "../../../../hooks/useRefreshOnFocus";
+import {ActivityIndicator} from "react-native-paper";
 
 type props = {
-  navigation: AppStackNavigationProp<"Home">;
+    navigation: AppStackNavigationProp<"Home">;
 };
 
-const Berita: React.FC<props> = ({ navigation }) => {
-  const handleRedirect = (
-    navigation: StackNavigationProp<AppStackParamList>
-  ) => {
-    navigation.navigate("Login");
-  };
+const Berita: React.FC<props> = ({navigation}) => {
 
-  return (
-    <View
-      style={{
-        paddingLeft: 20,
-        paddingRight: 20,
-        gap: 12,
-      }}
-    >
-      <TitleAndDescription
-        title={"Berita MyMRTJ"}
-        description={
-          "Buat" + " kamu yang ingin tau informasi terbaru tentang MRT"
-        }
-        redirect={handleRedirect}
-        navigation={navigation}
-      />
+    let {isPending, error, data, refetch} = useQuery<ArticleList[], Error>({
+        queryKey: ["articleList"],
+        queryFn: fetchArticleList,
+    })
 
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-      >
+    useRefreshOnFocus(refetch)
+
+    const handleRedirect = (
+        navigation: StackNavigationProp<AppStackParamList>
+    ) => {
+        navigation.navigate("Berita");
+    };
+
+    return (
         <View
-          style={{
-            flexDirection: "row",
-            gap: 14,
-            borderRadius: 10,
-            overflow: "hidden",
-            borderColor: "#E5EDF7",
-            borderWidth: 1,
-          }}
-        >
-          <View
             style={{
-              flexDirection: "column",
-              display: "flex",
-              width: 250,
+                paddingLeft: 20,
+                paddingRight: 20,
+                gap: 12,
             }}
-          >
-            <Image
-              source={require("../../../../../assets/menu-mrt/1.png")}
-              style={{
-                width: "100%",
-                height: 125,
-                objectFit: "cover",
-              }}
+        >
+            <TitleAndDescription
+                title={"Berita MyMRTJ"}
+                description={
+                    "Buat" + " kamu yang ingin tau informasi terbaru tentang MRT"
+                }
+                redirect={handleRedirect}
+                navigation={navigation}
             />
 
-            <View
-              style={{
-                padding: 10,
-              }}
+            <ScrollView
+                horizontal
+                showsHorizontalScrollIndicator={false}
             >
-              <Text
-                numberOfLines={2}
-                ellipsizeMode={"tail"}
-              >
-                Per 25 Mei, Pembangunan Fase 2A CP 201 Capai 77,36 Persen
-                aslkdjfslkdfjslkfalkjsa
-              </Text>
-            </View>
-          </View>
+                <View
+                    style={{
+                        flexDirection: "row",
+                        gap: 14,
+                        borderRadius: 10,
+                        overflow: "hidden",
+                        borderColor: "#E5EDF7",
+                        borderWidth: 1,
+                    }}
+                >
+                    {
+                        isPending ? <ActivityIndicator/> : (
+                            data && data.length > 0 ? (
+                                data.map((item, index) => (
+                                    <View style={{
+                                        flexDirection: "column",
+                                        display: "flex",
+                                        width: 250,
+                                        gap: 14,
+                                        borderRadius: 10,
+                                        overflow: "hidden",
+                                        borderColor: "#E5EDF7",
+                                        borderWidth: 1,
+                                    }} key={index}>
+                                        <Image
+                                            source={
+                                                {uri: item.headerUrl}
+                                            }
+                                            style={{
+                                                width: "100%",
+                                                height: 150,
+                                                objectFit: "cover",
+                                            }}
+                                        />
+                                        <View style={{
+                                            padding: 10,
+                                        }}>
+                                            <Text numberOfLines={2}
+                                                  ellipsizeMode={"tail"}>
+                                                {item.title}
+                                            </Text>
+
+                                        </View>
+
+                                    </View>))
+                            ) : (
+                                <Text>Tidak ada berita yang
+                                    tersedia</Text>
+                            )
+                        )
+                    }
+                </View>
+            </ScrollView>
         </View>
-      </ScrollView>
-    </View>
-  );
+    );
 };
 
 export default Berita;
