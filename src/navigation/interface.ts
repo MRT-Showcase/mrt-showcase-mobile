@@ -1,15 +1,20 @@
-import {StackNavigationProp} from "@react-navigation/stack";
+import { StackNavigationProp } from "@react-navigation/stack";
 
 export type AppStackParamList = {
-    Home: undefined;
-    Profile: undefined;
-    Login: undefined;
-    Register: undefined;
-    OTP: undefined;
-    CreatePin: undefined;
-    ConfirmPin: undefined;
-
+  Login: undefined;
+  Register: undefined;
+  OTP: undefined;
+  CreatePin: undefined;
+  ConfirmPin: undefined;
+  UserTab: undefined;
 };
 
 export type AppStackNavigationProp<T extends keyof AppStackParamList> =
-    StackNavigationProp<AppStackParamList, T>;
+  StackNavigationProp<AppStackParamList, T>;
+
+export type UserStackParamList = {
+  Home: undefined;
+  Profile: undefined;
+  Tiket: undefined;
+  Bantuan: undefined;
+};
