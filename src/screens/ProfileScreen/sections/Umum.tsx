@@ -10,83 +10,84 @@ import { useUserStore } from "../../../zustand-store/user";
 import BottomSheetAudio from "../../../components/BottomSheetAudio";
 
 const Umum = () => {
-  const dispatch = useDispatch();
-  const isDyslexic = useUserStore((state) => state.isDyslexic);
+    const dispatch = useDispatch();
+    const isDyslexic = useUserStore((state) => state.isDyslexic);
 
-  const items: Item[] = [
-    {
-      icon: require("../../../../assets/language-1.png"),
-      title: "Bahasa",
-      description: "Pilih Bahasa / Choose Language",
-    },
-    {
-      icon: require("../../../../assets/dyslexia-1.png"),
-      title: "Mode InCommute",
-      description: "Mode ini menyederhanakan tampilan aplikasi",
-      onPress: () => {
-        dispatch(setBottomSheet(<BottomSheetDyslexia />));
-      },
-    },
-    {
-      icon: require("../../../../assets/scroll-1.png"),
-      title: "Syarat dan Ketentuan",
-    },
-    {
-      icon: require("../../../../assets/padlock-1.png"),
-      title: "Kebijakan Privasi",
-    },
-    {
-      icon: require("../../../../assets/smartphone-1.png"),
-      title: "Versi Aplikasi",
-      description: "4.2.1",
-    },
-  ];
+    const items: Item[] = [
+        {
+            icon: require("../../../../assets/language-1.png"),
+            title: "Bahasa",
+            description: "Pilih Bahasa / Choose Language",
+        },
+        {
+            icon: require("../../../../assets/dyslexia-1.png"),
+            title: "Mode InCommute",
+            description: "Mode ini menyederhanakan tampilan aplikasi",
+            onPress: () => {
+                dispatch(setBottomSheet("BottomSheetDyslexia"));
+            },
+        },
+        {
+            icon: require("../../../../assets/scroll-1.png"),
+            title: "Syarat dan Ketentuan",
+        },
+        {
+            icon: require("../../../../assets/padlock-1.png"),
+            title: "Kebijakan Privasi",
+        },
+        {
+            icon: require("../../../../assets/smartphone-1.png"),
+            title: "Versi Aplikasi",
+            description: "4.2.1",
+        },
+    ];
 
-  return (
-    <View
-      style={{
-        gap: 16,
-      }}
-    >
-      <Text
-        style={{
-          fontSize: 24,
-        }}
-      >
-        Menu Profil
-      </Text>
+    return (
+        <View
+            style={{
+                gap: 16,
+            }}
+        >
+            <Text
+                style={{
+                    fontSize: 24,
+                }}
+            >
+                Menu Profil
+            </Text>
 
-      <View
-        style={{
-          gap: 13,
-        }}
-      >
-        {items.map(({ title, icon, description, onPress }, index) => (
-          <>
-            <ProfileItem
-              icon={icon}
-              title={title}
-              description={description}
-              onPress={onPress}
-              key={index}
-            />
-            {index !== items.length - 1 && <Divider />}
-            {title == "Mode InCommute" && isDyslexic && (
-              <>
-                <ProfileItem
-                  icon={require("../../../../assets/audio-1.png")}
-                  title={"Pembaca Teks"}
-                  description={"Fitur akan membacakan teks pada layar"}
-                  onPress={() => dispatch(setBottomSheet(<BottomSheetAudio />))}
-                />
-                {index !== items.length - 1 && <Divider />}
-              </>
-            )}
-          </>
-        ))}
-      </View>
-    </View>
-  );
+            <View
+                style={{
+                    gap: 13,
+                }}
+            >
+                {items.map(({title, icon, description, onPress}, index) => (
+                    <>
+                        <ProfileItem
+                            icon={icon}
+                            title={title}
+                            description={description}
+                            onPress={onPress}
+                            key={index}
+                        />
+                        {index !== items.length - 1 && <Divider/>}
+                        {title == "Mode InCommute" && isDyslexic && (
+                            <>
+                                <ProfileItem
+                                    icon={require("../../../../assets/audio-1.png")}
+                                    title={"Pembaca Teks"}
+                                    description={"Fitur akan membacakan teks pada layar"}
+                                    onPress={() => dispatch(setBottomSheet(
+                                        "BottomSheetAudio"))}
+                                />
+                                {index !== items.length - 1 && <Divider/>}
+                            </>
+                        )}
+                    </>
+                ))}
+            </View>
+        </View>
+    );
 };
 
 export default Umum;

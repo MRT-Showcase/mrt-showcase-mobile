@@ -3,6 +3,7 @@ import {
     ImageSourcePropType,
     Text,
     TouchableOpacity,
+    useWindowDimensions,
     View,
 } from "react-native";
 import React from "react";
@@ -33,25 +34,37 @@ const WidgetCardBS = ({title, image, itemId}: Props) => {
         dispatch(removeBottomSheet());
     };
 
+    let {width} = useWindowDimensions();
+
     return (
-        <TouchableOpacity onPress={submitReplace}>
+        <TouchableOpacity onPress={submitReplace}
+                          style={{
+                              overflow: "hidden",
+                              borderColor: "#000000EE",
+                              borderRadius: 20,
+                              borderWidth: 1,
+                              flexDirection: "column",
+                              gap: 30,
+                              justifyContent: "center",
+                              alignItems: "center",
+                              position: "relative",
+                              marginLeft: 5,
+                              marginRight: 5,
+                          }}
+        >
             <View
                 style={{
-                    borderColor: "#000000EE",
-                    borderRadius: 20,
-                    borderWidth: 1,
-                    justifyContent: "center",
                     alignItems: "center",
-                    width: 180,
-                    height: 250,
-                    // backgroundColor: "yellow",
+                    gap: 10,
+                    width: (width / 2) - (width * 0.1),
+                    height: 200,
                 }}
             >
                 <Image
                     source={image}
                     style={{
-                        width: 136,
-                        height: 153,
+                        width: "100%",
+                        height: 150,
                     }}
                 />
                 <Text
