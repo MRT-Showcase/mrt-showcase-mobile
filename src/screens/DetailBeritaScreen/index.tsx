@@ -9,6 +9,7 @@ import React, {useEffect, useState} from "react";
 import {useRefreshOnFocus} from "../../hooks/useRefreshOnFocus";
 import {
     Image,
+    Platform,
     ScrollView,
     StatusBar,
     StyleSheet,
@@ -114,7 +115,9 @@ const DetailBeritaScreen: React.FC<Props> = ({route, navigation}) => {
             fetchSelectedWord(selection).then()
         }
     }, [selection])
-
+    const handleKeyPress = (e: any) => {
+        e.preventDefault();
+    };
     const playSound = async ({uri}: { uri: string }) => {
         await Audio.setAudioModeAsync({
             playsInSilentModeIOS: true,
@@ -230,7 +233,10 @@ const DetailBeritaScreen: React.FC<Props> = ({route, navigation}) => {
                                             borderRadius: 10,
                                         }}
                                     />
-                                    <TextInput multiline editable={false}
+                                    <TextInput multiline
+                                               editable={false}
+                                               contextMenuHidden={true}
+                                               selectTextOnFocus={Platform.OS !== 'ios'} // Enable selection on Android
                                                style={{
                                                    color: "black",
                                                    fontSize: 16,
