@@ -93,7 +93,7 @@ const BantuanScreen = () => {
                   gap: 13,
                 }}
               >
-                <Image source={require("../../../assets/info.png")} />
+                <Image source={value.icon} />
 
                 <View
                   style={{
