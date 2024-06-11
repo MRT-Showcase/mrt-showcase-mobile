@@ -33,6 +33,7 @@ const Berita: React.FC<props> = ({ navigation }) => {
         }
         redirect={handleRedirect}
         navigation={navigation}
+        isDyslexic
       />
 
       <ScrollView

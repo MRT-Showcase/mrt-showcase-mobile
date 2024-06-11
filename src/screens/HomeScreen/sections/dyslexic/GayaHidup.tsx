@@ -12,6 +12,7 @@ const GayaHidup = () => (
     <TitleAndDescription
       title="Gaya Hidup"
       description="Penuhi gaya hidupmu bersama mitra MyMRTJ!"
+      isDyslexic
     />
 
     <ScrollView
@@ -28,8 +29,8 @@ const GayaHidup = () => (
           <View
             key={index}
             style={{
-              width: 62,
-              height: 62,
+              width: 111,
+              height: 110,
               backgroundColor: "red",
               borderRadius: 6,
             }}

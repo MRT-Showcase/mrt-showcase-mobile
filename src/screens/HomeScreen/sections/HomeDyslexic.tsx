@@ -18,7 +18,11 @@ const HomeDyslexic = ({ navigation }: Props) => {
 
   return (
     <ScrollView>
-      <View>
+      <View
+        style={{
+          gap: 14,
+        }}
+      >
         <Hero name={user?.fullName} />
         <Menu />
         <GayaHidup />
