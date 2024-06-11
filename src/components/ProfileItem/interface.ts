@@ -3,5 +3,5 @@ import { ImageSourcePropType } from "react-native";
 export interface Item {
   icon: ImageSourcePropType;
   title: string;
-  description: string;
+  description?: string;
 }

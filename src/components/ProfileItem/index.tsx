@@ -26,13 +26,15 @@ const ProfileItem: React.FC<Props> = ({ icon, title, description }) => (
       >
         {title}
       </Text>
-      <Text
-        style={{
-          fontWeight: 100,
-        }}
-      >
-        {description}
-      </Text>
+      {description && (
+        <Text
+          style={{
+            fontWeight: 100,
+          }}
+        >
+          {description}
+        </Text>
+      )}
     </View>
   </View>
 );

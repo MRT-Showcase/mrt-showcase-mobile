@@ -6,19 +6,27 @@ import { Divider } from "react-native-paper";
 const Umum = () => {
   const items: Item[] = [
     {
-      icon: require("../../../../assets/user-1.png"),
-      title: "Akun",
-      description: "Ubah data akun kamu",
+      icon: require("../../../../assets/language-1.png"),
+      title: "Bahasa",
+      description: "Pilih Bahasa / Choose Language",
     },
     {
-      icon: require("../../../../assets/history-1.png"),
-      title: "Pembayaran",
-      description: "Atur pembayaran yang kamu koneksikan",
+      icon: require("../../../../assets/dyslexia-1.png"),
+      title: "Mode Dyslexia",
+      description: "Mode ini menyederhanakan tampilan aplikasi",
     },
     {
-      icon: require("../../../../assets/wallet-1.png"),
-      title: "Riwayat Aktivitas",
-      description: "Riwayat tikey yang sudah lampau",
+      icon: require("../../../../assets/scroll-1.png"),
+      title: "Syarat dan Ketentuan",
+    },
+    {
+      icon: require("../../../../assets/padlock-1.png"),
+      title: "Kebijakan Privasi",
+    },
+    {
+      icon: require("../../../../assets/smartphone-1.png"),
+      title: "Versi Aplikasi",
+      description: "4.2.1",
     },
   ];
 

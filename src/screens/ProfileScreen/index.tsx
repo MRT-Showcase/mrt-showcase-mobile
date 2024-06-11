@@ -1,21 +1,27 @@
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import Hero from "./sections/Hero";
 import MenuProfil from "./sections/MenuProfil";
 import Umum from "./sections/Umum";
 
 const ProfileScreen = () => (
-  <View>
-    <Hero />
+  <ScrollView>
     <View
       style={{
-        padding: 20,
-        gap: 20,
+        backgroundColor: "white",
       }}
     >
-      <MenuProfil />
-      <Umum />
+      <Hero />
+      <View
+        style={{
+          padding: 20,
+          gap: 20,
+        }}
+      >
+        <MenuProfil />
+        <Umum />
+      </View>
     </View>
-  </View>
+  </ScrollView>
 );
 
 export default ProfileScreen;
