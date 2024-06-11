@@ -6,8 +6,15 @@ import Umum from "./sections/Umum";
 const ProfileScreen = () => (
   <View>
     <Hero />
-    <MenuProfil />
-    <Umum />
+    <View
+      style={{
+        padding: 20,
+        gap: 20,
+      }}
+    >
+      <MenuProfil />
+      <Umum />
+    </View>
   </View>
 );
 
