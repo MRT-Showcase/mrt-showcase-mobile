@@ -30,6 +30,14 @@
         "projectId": "2e3d7fb9-24b4-4fb7-8eb0-8d01ee260ef0"
       }
     },
-    "owner": "mhmdhaekal"
+    "owner": "mhmdhaekal",
+    "plugins": [
+      [
+        "expo-av",
+        {
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone."
+        }
+      ]
+    ]
   }
 }
